@@ -1,11 +1,19 @@
-package slidingWindow;
+package suanFaModel;
+
 
 import java.util.HashMap;
+
 /**
  * @author xiaokuo
  * @since 2021/1/8 12:31 上午
  */
 public class slidingWindow {
+
+    public static void main(String[] args) {
+
+
+    }
+
 
     /**
      * 模板
