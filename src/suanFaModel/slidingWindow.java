@@ -11,7 +11,7 @@ public class slidingWindow {
 
     public static void main(String[] args) {
 
-
+        System.out.println((new slidingWindow()).minWindow("ADOBECODEBANC", "ABC"));
     }
 
 
@@ -55,4 +55,65 @@ public class slidingWindow {
 
         }
     }
+
+    /**
+     * 最长子序列 76.
+     *
+     * 给你一个字符串 s 、一个字符串 t 。返回 s 中涵盖 t 所有字符的最小子串。
+     * 如果 s 中不存在涵盖 t 所有字符的子串，则返回空字符串 "" 。
+     */
+    public String minWindow(String s, String t) {
+
+        if (s.length() == 0 || t.length() ==0 ){
+            return  "";
+        }
+
+        HashMap<Character, Integer> needs = new HashMap<>();
+        HashMap<Character, Integer> windows = new HashMap<>();
+        int tLen = t.length();
+        for (int i = 0 ; i < tLen; i++){
+            char currT = t.charAt(i);
+            needs.put(currT, needs.getOrDefault(currT, 0) + 1);
+        }
+        int sLen = s.length();
+        int valid = 0;
+        int right = 0, left = 0;
+        int len = Integer.MAX_VALUE;
+        int start = 0;
+        while(right < sLen){
+
+            char rCurr = s.charAt(right);
+            right++;
+
+            if (needs.containsKey(rCurr)){
+                windows.put(rCurr, windows.getOrDefault(rCurr, 0) + 1);
+                if (windows.get(rCurr) == needs.get(rCurr)){
+                    valid++;
+                }
+            }
+
+            while (valid == needs.size()){
+                char lCurr =  s.charAt(left);
+
+                if (right - left < len){
+                    len = right - left;
+                    start = left ;
+                }
+                left++;
+
+                if (needs.containsKey(lCurr)){
+                   int windowsValue =  windows.get(lCurr);
+
+                   if (windowsValue == needs.get(lCurr)){
+                       valid--;
+                   }
+
+                   windows.put(lCurr, --windowsValue);
+                }
+            }
+        }
+
+        return len < Integer.MAX_VALUE ? s.substring(start, start + len) : "";
+    }
+
 }
