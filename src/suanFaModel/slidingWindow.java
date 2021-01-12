@@ -14,6 +14,7 @@ public class slidingWindow {
     public static void main(String[] args) {
 
         System.out.println((new slidingWindow()).minWindow("ADOBECODEBANC", "ABC"));
+        System.out.println((new slidingWindow()).lengthOfLongestSubstring("abcabcbb"));
     }
 
 
@@ -178,7 +179,7 @@ public class slidingWindow {
     }
 
     /**
-     * 3
+     * 最长子串 的长度  3
      * 给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。
      * 输入: s = "abcabcbb"
      * //输出: 3
@@ -211,13 +212,19 @@ public class slidingWindow {
             right++;
 
             while (windows.get(rCur) > 1){
-                int tmpLen = windows.size() - 1;
-                res  = tmpLen > res ? tmpLen : res;
+
 
                 char lCur = s.charAt(left);
                 left++;
-                windows.put(lCur, windows.getOrDefault(lCur, 0) + 1);
+
+                windows.put(lCur, windows.getOrDefault(lCur, 1) - 1);
+
+                if (windows.get(lCur) == 0){
+                    windows.remove(lCur);
+                }
             }
+            int tmpLen = windows.size();
+            res  = tmpLen > res ? tmpLen : res;
         }
 
         return  res == Integer.MIN_VALUE ? 0 : res;
