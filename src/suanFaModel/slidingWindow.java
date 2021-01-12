@@ -1,7 +1,9 @@
 package suanFaModel;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author xiaokuo
@@ -254,6 +256,30 @@ public class slidingWindow {
      * //起始索引等于 6 的子串是 "bac", 它是 "abc" 的字母异位词。
      * //
      */
+    public List<Integer> findAnagrams(String s, String p) {
+
+        List<Integer> res = new ArrayList<>();
+
+        HashMap<Character, Integer> windows = new HashMap<>();
+        HashMap<Character, Integer> needs   = new HashMap<>();
+
+        int pLen = p.length();
+        for (int i = 0; i < pLen; i++){
+            char cur = p.charAt(i);
+            needs.put(cur, needs.getOrDefault(cur, 0) + 1);
+        }
+
+        int right = 0;
+        int left  = 0;
+        int valid = 0;
+        int sLen  = s.length();
+
+        while (right < sLen){
+
+        }
+
+        return  res;
+    }
 
     /**
      *567
