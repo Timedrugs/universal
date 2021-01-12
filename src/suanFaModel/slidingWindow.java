@@ -177,4 +177,92 @@ public class slidingWindow {
         return minString;
     }
 
+    /**
+     * 3
+     * 给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。
+     * 输入: s = "abcabcbb"
+     * //输出: 3
+     * //解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
+     *
+     * 输入: s = "pwwkew"
+     * //输出: 3
+     * //解释: 因为无重复字符的最长子串是 "wke"，所以其长度为 3。
+     * //     请注意，你的答案必须是 子串 的长度，"pwke" 是一个子序列，不是子串。
+     */
+    public int lengthOfLongestSubstring(String s) {
+
+        int len = s.length();
+
+        if(len < 2){
+            return len;
+        }
+
+        int res = Integer.MIN_VALUE;
+        HashMap<Character, Integer> windows = new HashMap<>();
+
+        int right = 0, left = 0;
+
+        while (right < len){
+
+            char rCur = s.charAt(right);
+
+            windows.put(rCur, windows.getOrDefault(rCur, 0) + 1);
+
+            right++;
+
+            while (windows.get(rCur) > 1){
+                int tmpLen = windows.size() - 1;
+                res  = tmpLen > res ? tmpLen : res;
+
+                char lCur = s.charAt(left);
+                left++;
+                windows.put(lCur, windows.getOrDefault(lCur, 0) + 1);
+            }
+        }
+
+        return  res == Integer.MIN_VALUE ? 0 : res;
+    }
+
+
+    /**
+     * 438
+     * //给定一个字符串 s 和一个非空字符串 p，找到 s 中所有是 p 的字母异位词的子串，返回这些子串的起始索引。
+     * //
+     * // 字符串只包含小写英文字母，并且字符串 s 和 p 的长度都不超过 20100。
+     * //
+     * // 说明：
+     * //
+     * //
+     * // 字母异位词指字母相同，但排列不同的字符串。
+     * // 不考虑答案输出的顺序。
+     *
+     * //输入:
+     * //s: "cbaebabacd" p: "abc"
+     * //
+     * //输出:
+     * //[0, 6]
+     * //
+     * //解释:
+     * //起始索引等于 0 的子串是 "cba", 它是 "abc" 的字母异位词。
+     * //起始索引等于 6 的子串是 "bac", 它是 "abc" 的字母异位词。
+     * //
+     */
+
+    /**
+     *567
+     *
+     * 给定两个字符串 s1 和 s2，写一个函数来判断 s2 是否包含 s1 的排列。
+     * //
+     * // 换句话说，第一个字符串的排列之一是第二个字符串的子串。
+     * //
+     * // 示例1:
+     * //
+     * //
+     * //输入: s1 = "ab" s2 = "eidbaooo"
+     * //输出: True
+     * //解释: s2 包含 s1 的排列之一 ("ba").
+     * //
+     */
+
+
 }
