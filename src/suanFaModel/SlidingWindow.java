@@ -11,14 +11,14 @@ import java.util.List;
  *
  * url: https://mp.weixin.qq.com/s/ioKXTMZufDECBUwRRp3zaA
  */
-public class slidingWindow {
+public class SlidingWindow {
 
     public static void main(String[] args) {
 
-        System.out.println((new slidingWindow()).minWindow("ADOBECODEBANC", "ABC"));
-        System.out.println((new slidingWindow()).lengthOfLongestSubstring("abcabcbb"));
-        System.out.println((new slidingWindow()).findAnagrams("baa", "aa"));
-        System.out.println((new slidingWindow()).checkInclusion("hello", "ooolleoooleh"));
+        System.out.println((new SlidingWindow()).minWindow("ADOBECODEBANC", "ABC"));
+        System.out.println((new SlidingWindow()).lengthOfLongestSubstring("abcabcbb"));
+        System.out.println((new SlidingWindow()).findAnagrams("baa", "aa"));
+        System.out.println((new SlidingWindow()).checkInclusion("hello", "ooolleoooleh"));
     }
 
 

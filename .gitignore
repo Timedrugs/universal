@@ -1,3 +1,5 @@
 .idea
 .DS_Store
 suanfa.iml
+out/*
+universal.iml
