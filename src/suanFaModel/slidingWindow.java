@@ -17,6 +17,8 @@ public class slidingWindow {
 
         System.out.println((new slidingWindow()).minWindow("ADOBECODEBANC", "ABC"));
         System.out.println((new slidingWindow()).lengthOfLongestSubstring("abcabcbb"));
+        System.out.println((new slidingWindow()).findAnagrams("baa", "aa"));
+        System.out.println((new slidingWindow()).checkInclusion("hello", "ooolleoooleh"));
     }
 
 
@@ -235,6 +237,7 @@ public class slidingWindow {
 
     /**
      * 438
+     * 题解：https://leetcode-cn.com/problems/find-all-anagrams-in-a-string/solution/javayou-hua-labuladongda-lao-hua-dong-chuang-kou-t/
      * //给定一个字符串 s 和一个非空字符串 p，找到 s 中所有是 p 的字母异位词的子串，返回这些子串的起始索引。
      * //
      * // 字符串只包含小写英文字母，并且字符串 s 和 p 的长度都不超过 20100。
@@ -276,6 +279,39 @@ public class slidingWindow {
 
         while (right < sLen){
 
+            char rCur = s.charAt(right);
+
+            if (needs.containsKey(rCur)){
+
+                windows.put(rCur, windows.getOrDefault(rCur, 0) + 1);
+
+                if (windows.get(rCur) == needs.get(rCur)){
+                    valid++;
+                }
+            }
+
+            while (valid == needs.size()){
+
+                if (right - left + 1 == pLen){
+                    res.add(left);
+                }
+
+                char lChar = s.charAt(left);
+                left++;
+
+                if (needs.containsKey(lChar)){
+//                    windows.put(rCur, windows.getOrDefault(rCur, 0) - 1);
+
+                    int windowsValue  = windows.get(lChar);
+                    if(windowsValue == needs.get(lChar)){
+                        valid--;
+                    }
+
+                    windows.put(lChar, --windowsValue);
+                }
+            }
+
+            right++;
         }
 
         return  res;
@@ -296,6 +332,94 @@ public class slidingWindow {
      * //解释: s2 包含 s1 的排列之一 ("ba").
      * //
      */
+    public boolean checkInclusion(String s1, String s2) {
+
+        int s1Len = s1.length();
+        int s2Len = s2.length();
+        if (s1Len == 0 && s2Len == 0){
+            return true;
+        }
+
+        if(s1Len > s2Len){
+            return false;
+        }
+
+        if (s1Len == 0 || s2Len == 0){
+            return false;
+        }
+
+        HashMap<Character, Integer> windows = new HashMap<>();
+        HashMap<Character, Integer> needs   = new HashMap<>();
+
+        for (int i = 0; i < s1Len; i++){
+            char cur = s1.charAt(i);
+            needs.put(cur, needs.getOrDefault(cur, 0) + 1);
+        }
+
+        int right = 0,left = 0, valid = 0;
+
+        while(right < s2Len){
+            char rCur = s2.charAt(right);
+
+            if (needs.containsKey(rCur)){
+
+                windows.put(rCur, windows.getOrDefault(rCur, 0) + 1);
+
+                if (windows.get(rCur).equals(needs.get(rCur))){
+                    valid++;
+                }
+            }
+
+            while (valid == needs.size()){
+                if(right - left + 1 == s1.length()){
+                    return  true;
+                }
+
+                char lCur = s2.charAt(left);
+                if (needs.containsKey(lCur)){
+
+                    int windowsValue = windows.get(lCur);
+                    if (needs.get(lCur).equals(windowsValue)){
+                        valid--;
+                    }
+
+                    windows.put(lCur, --windowsValue);
+                }
+                left++;
+            }
+
+            right++;
+        }
+
+        return  false;
+    }
+
+    /**
+     * 209
+     * 给定一个含有 n 个正整数的数组和一个正整数 s ，找出该数组中满足其和 ≥ s 的长度最小的 连续 子数组，并返回其长度。如果不存在符合条件的子数组，返回
+     * 输入：s = 7, nums = [2,3,1,2,4,3]
+     * //输出：2
+     *
+     * 4+3 = 7
+     *
+     * Related Topics 数组 双指针 二分查找
+     */
 
 
+
+    /**
+     * 1209
+     *
+     * 给你一个字符串 s，「k 倍重复项删除操作」将会从 s 中选择 k 个相邻且相等的字母，并删除它们，使被删去的字符串的左侧和右侧连在一起。
+     * //
+     * // 你需要对 s 重复进行无限次这样的删除操作，直到无法继续为止。
+     *
+     *
+     *  输入：s = "deeedbbcccbdaa", k = 3
+     * //输出："aa"
+     * //解释：
+     * //先删除 "eee" 和 "ccc"，得到 "ddbbbdaa"
+     * //再删除 "bbb"，得到 "dddaa"
+     * //最后删除 "ddd"，得到 "aa"
+     */
 }
