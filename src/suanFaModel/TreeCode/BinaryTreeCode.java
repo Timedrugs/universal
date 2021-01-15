@@ -3,8 +3,6 @@
  */
 package suanFaModel.TreeCode;
 
-import javax.swing.tree.TreeNode;
-import suanFaModel.ListNodeCode.ListNode;
 
 /**
  * TODO Description
@@ -17,6 +15,7 @@ public class BinaryTreeCode {
 
     public static void main(String[] args) {
 
+//        System.out.println((new BinaryTreeCode()).invertTree([4,2,7,1,3,6,9]));
     }
 
     /**
@@ -26,11 +25,46 @@ public class BinaryTreeCode {
     public void traverseFramework(TreeNode root){
 
         //前序遍历
-//        traverseFramework(root.left);
+        traverseFramework(root.left);
         //中序遍历
-//        traverseFramework(root.right);
+        traverseFramework(root.right);
         //后序遍历
     }
 
+    /**
+     *  226 题「翻转二叉树」
+     *
+     *     4
+     *    /   \
+     *   2     7
+     *  / \   / \
+     * 1   3 6   9
+     *
+     * 变成如下
+     *      4
+     *    /   \
+     *   7     2
+     *  / \   / \
+     * 9   6 3   1
+     */
+    public TreeNode invertTree(TreeNode root) {
+
+        if (null == root){
+            return root;
+        }
+
+        /**** 前序遍历位置 ****/
+        // root 节点需要交换它的左右子节点
+        TreeNode tmp;
+        tmp = root.left;
+        root.left = root.right;
+        root.right = tmp;
+
+        // 让左右子节点继续翻转它们的子节点
+        invertTree(root.right);
+        invertTree(root.left);
+
+        return root;
+    }
 
 }
