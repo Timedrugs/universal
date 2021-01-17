@@ -25,8 +25,9 @@ public class ArrayCode {
 //        System.out.println(cl.searchInsert(nums, 2));
 //        System.out.println(cl.searchInsertV1(new int[]{1,3,4}, 3));
 //        System.out.println(cl.removeElement(new int[]{2}, 2));
-        System.out.println(Arrays.toString(cl.twoSum(new int[]{2,7,11,15}, 9)));
-        System.out.println(Arrays.toString(cl.plusOne(new int[]{9,9,9})));
+//        System.out.println(Arrays.toString(cl.twoSum(new int[]{2,7,11,15}, 9)));
+//        System.out.println(Arrays.toString(cl.plusOne(new int[]{9,9,9})));
+        arrTo(cl.generateMatrix(3));
     }
 
     /**
@@ -223,9 +224,26 @@ public class ArrayCode {
      * 11
      *
      */
-//    public int maxArea(int[] height) {
-//
-//    }
+    public int maxArea(int[] height) {
+        int length = height.length;
+        if (length == 0) {
+            return -1;
+        }
+        int i = 0;
+        int j = length - 1;
+        int res = 0;
+        while (i < j) {
+            int longer = height[i] >  height[j] ?  height[j]:  height[i];
+            res = res > longer * (j - i) ? res : longer * (j - i);
+            if (height[i] < height[j]) {
+                i++;
+            } else {
+                j--;
+            }
+        }
+
+        return res;
+    }
 
     /**
      * 59
@@ -243,6 +261,57 @@ public class ArrayCode {
      */
     public int[][] generateMatrix(int n) {
 
+        if(n < 1){
+            return  new int[n][n];
+        }
+
+        int tar = n * n;
+        int left = 0;
+        int top =  0 ;
+        int right = n - 1;
+        int bottom = n - 1;
+        int [][] res = new int[n][n];
+        int first = 1;
+        while (first <= tar){
+
+            // left to right.
+             for(int i = left; i <= right; i++) {
+                res[top][i] = first++;
+            }
+            top++;
+
+            //top => bottom
+            for (int i = top ; i <= bottom; i++){
+                res[i][right] = first++;
+            }
+
+            right--;
+            //right => left
+            for (int i = right; i >= left; i--){
+                res[bottom][i] = first++;
+            }
+
+            bottom--;
+            //bottom => top
+            for (int i = bottom; i >= top; i--){
+                res[i][left] = first++;
+            }
+
+            left++;
+
+        }
+
+        return res;
+
     }
 
+    public static void arrTo(int[][] arr){
+
+        int len = arr.length;
+        for (int i = 0; i < len ;i++){
+
+            System.out.println(Arrays.toString(arr[i]));
+        }
+    }
 }
+
