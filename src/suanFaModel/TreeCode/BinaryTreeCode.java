@@ -4,8 +4,6 @@
 package suanFaModel.TreeCode;
 
 
-import apple.laf.JRSUIUtils.Tree;
-
 /**
  * TODO Description
  *
@@ -17,6 +15,8 @@ public class BinaryTreeCode {
 
     public static void main(String[] args) {
 
+        BinaryTreeCode cl = new BinaryTreeCode();
+        cl.traverseTree(cl.constructMaximumBinaryTree(new int[]{3}));
 //        System.out.println((new BinaryTreeCode()).invertTree([4,2,7,1,3,6,9]));
     }
 
@@ -158,6 +158,87 @@ public class BinaryTreeCode {
 
         tmp.right = right;
 
+    }
+
+    /**
+     * 654.最大二叉树
+     * （难度 Medium）
+     * 给定一个不含重复元素的整数数组 nums 。一个以此数组直接递归构建的 最大二叉树 定义如下：
+     * 二叉树的根是数组 nums 中的最大元素。
+     * // 左子树是通过数组中 最大值左边部分 递归构造出的最大二叉树。
+     * // 右子树是通过数组中 最大值右边部分 递归构造出的最大二叉树。
+     */
+    public TreeNode constructMaximumBinaryTree(int[] nums) {
+
+        if (nums.length == 0){
+            return new  TreeNode();
+        }
+
+        if (nums.length == 1){
+            return new  TreeNode(nums[0]);
+        }
+
+        int start = 0, end = nums.length - 1;
+        return buildTree(nums, start, end);
+    }
+    public TreeNode buildTree(int[] nums, int start, int end){
+
+        if (nums.length == 0){
+            return new  TreeNode();
+        }
+        if (nums.length == 1){
+            return new  TreeNode(nums[0]);
+        }
+
+        if (end < start){
+            return null;
+        }
+
+        int index = 0; int maxValue = Integer.MIN_VALUE;
+        for (int i = start; i <= end; i++){
+             int cur = nums[i];
+
+             if (cur > maxValue){
+                 maxValue = cur;
+                 index = i;
+             }
+        }
+
+        TreeNode root = new TreeNode(maxValue);
+        root.left     = buildTree(nums, start, index - 1);
+        root.right    = buildTree(nums, index + 1, end);
+        return  root;
+    }
+
+
+
+    /**
+     * 105.从前序与中序遍历序列构造二叉树
+     * （难度 Medium）
+     */
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+
+    }
+
+
+    /**
+     * 106.从中序与后序遍历序列构造二叉树
+     * （难度 Medium）
+     * @return
+     */
+
+
+
+    public void traverseTree(TreeNode root){
+
+        if (root == null){
+            System.out.print("#");
+            return;
+        }
+        //中序遍历
+        traverseTree(root.left);
+        System.out.print(root.val);
+        traverseTree(root.left);
     }
 
 }
