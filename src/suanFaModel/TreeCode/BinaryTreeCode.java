@@ -179,9 +179,9 @@ public class BinaryTreeCode {
         }
 
         int start = 0, end = nums.length - 1;
-        return buildTree(nums, start, end);
+        return buildTree654(nums, start, end);
     }
-    public TreeNode buildTree(int[] nums, int start, int end){
+    public TreeNode buildTree654(int[] nums, int start, int end){
 
         if (nums.length == 0){
             return new  TreeNode();
@@ -205,8 +205,8 @@ public class BinaryTreeCode {
         }
 
         TreeNode root = new TreeNode(maxValue);
-        root.left     = buildTree(nums, start, index - 1);
-        root.right    = buildTree(nums, index + 1, end);
+        root.left     = buildTree654(nums, start, index - 1);
+        root.right    = buildTree654(nums, index + 1, end);
         return  root;
     }
 
@@ -218,7 +218,34 @@ public class BinaryTreeCode {
      */
     public TreeNode buildTree(int[] preorder, int[] inorder) {
 
+        if (preorder.length == 0 || preorder.length == 0){
+            return null;
+        }
+        return buildTree105(preorder, 0, preorder.length - 1, inorder, 0, inorder.length -1);
     }
+    public TreeNode buildTree105(int[] preorder, int preStart, int preEnd,
+                                 int[] inorder, int inStart, int inEnd){
+        if (preStart > preEnd){
+            return  null;
+        }
+
+        TreeNode root = new TreeNode(preorder[preStart]);
+        int index  = 0;
+
+        for (int i = inStart; i <= inEnd; i++){
+            if (inorder[i] == preorder[preStart]){
+                index = i;
+                break;
+            }
+        }
+
+        int leftLen = index - inStart;
+        root.left = buildTree105(preorder, preStart + 1, leftLen + preStart ,inorder, inStart, index - 1);
+        root.right = buildTree105(preorder, leftLen + preStart + 1, preEnd,inorder, index + 1, inEnd);
+
+        return root;
+    }
+
 
 
     /**
@@ -226,7 +253,9 @@ public class BinaryTreeCode {
      * （难度 Medium）
      * @return
      */
-
+//    public TreeNode buildTree(int[] inorder, int[] postorder) {
+//
+//    }
 
 
     public void traverseTree(TreeNode root){
