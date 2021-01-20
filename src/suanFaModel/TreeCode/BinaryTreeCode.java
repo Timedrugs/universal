@@ -4,6 +4,10 @@
 package suanFaModel.TreeCode;
 
 
+import apple.laf.JRSUIUtils.Tree;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * TODO Description
  *
@@ -245,7 +249,47 @@ public class BinaryTreeCode {
 
         return root;
     }
+    public TreeNode buildTreeV1(int[] preorder, int[] inorder) {
+        if (preorder.length == 0){
+            return  null;
+        }
 
+        if (preorder.length == 1){
+            return new TreeNode(preorder[0]);
+        }
+
+        List<Integer> preorderList = new ArrayList<>();
+        List<Integer> inorderList = new ArrayList<>();
+        for (int i = 0; i < preorder.length; i++) {
+            preorderList.add(preorder[i]);
+            inorderList.add(inorder[i]);
+        }
+        return helper(preorderList, inorderList);
+    }
+    private TreeNode helper(List<Integer> preList, List<Integer> indorList){
+        if (indorList.size() == 0){
+            return  null;
+        }
+
+        int value = preList.remove(0);
+
+        TreeNode root = new TreeNode(value);
+
+        int mid = indorList.indexOf(value);
+
+        //左子树  0 mid
+        //[0，mid)是左子树的所有值，inorderList.subList(0, mid)表示截取inorderList
+        //的值，截取的范围是[0，mid)，包含0不包含mid。
+        root.left =  helper(preList, indorList.subList(0, mid));
+        //    root.left = helper(preList, indorList.subList(0, mid));
+        // 右子树
+        //[mid+1，inorderList.size())是右子树的所有值，
+        // inorderList.subList(mid + 1, inorderList.size())表示截取inorderList
+        //的值，截取的范围是[mid+1，inorderList.size())，包含mid+1不包含inorderList.size()。
+        root.right = helper(preList, indorList.subList(mid + 1, indorList.size()));
+        return  root;
+
+    }
 
 
     /**
@@ -253,9 +297,41 @@ public class BinaryTreeCode {
      * （难度 Medium）
      * @return
      */
-//    public TreeNode buildTree(int[] inorder, int[] postorder) {
-//
-//    }
+    public TreeNode buildTree106(int[] inorder, int[] postorder) {
+
+        if (inorder.length <= 1){
+            return null;
+        }
+
+        int len = inorder.length;
+        List<Integer> inList = new ArrayList<>();
+        List<Integer> postList = new ArrayList<>();
+        int index = 0;
+        for (int i = 0; i < len ; i++){
+            inList.add(inorder[i]);
+            postList.add(postorder[i]);
+        }
+        return helper106(inList, postList);
+
+    }
+    private TreeNode helper106(List<Integer> inList, List<Integer> postList){
+
+        if (inList.size() == 0){
+            return null;
+        }
+
+        int rootV = postList.get(postList.size() - 1);
+        TreeNode root = new TreeNode(rootV);
+
+        int index = inList.indexOf(rootV);
+
+        //左子树  [0，mid)
+        root.left = helper106(inList, postList.subList(0, index));
+        root.right = helper106(inList, postList.subList(index, postList.size() - index));
+        return root;
+    }
+
+
 
 
     public void traverseTree(TreeNode root){
@@ -269,6 +345,10 @@ public class BinaryTreeCode {
         System.out.print(root.val);
         traverseTree(root.left);
     }
+
+
+
+
 
 }
 
