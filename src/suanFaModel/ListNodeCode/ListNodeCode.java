@@ -4,6 +4,8 @@
 package suanFaModel.ListNodeCode;
 
 
+import java.util.List;
+
 /**
  * 链表
  *
@@ -29,6 +31,126 @@ public class ListNodeCode {
      */
 
 
+    /**
+     * 题目：输入一个链表，输出该链表中倒数第k个结点。 例如： 1 2 3 4 5 6
+     *
+     * @param head
+     */
+    public static ListNode getKthFromEnd(ListNode head, int k) {
+
+        if (head == null) {
+            return null;
+        }
+
+        ListNode fast = head;
+        ListNode slow = head;
+
+        while (k-- > 0) {
+            fast = fast.next;
+        }
+
+        while (fast != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
+
+    /**
+     * 翻转链表
+     *
+     * @param head
+     * @return
+     */
+    public ListNode reverseList(ListNode head) {
+
+        if (head == null) {
+            return null;
+        }
+
+        ListNode pre = null;
+        ListNode cur = head;
+        ListNode tmp;
+
+        while (cur != null) {
+            tmp = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = tmp;
+        }
+
+        return pre;
+    }
+
+    /**
+     * 输入两个递增排序的链表，合并这两个链表并使新链表中的节点仍然是递增排序的。
+     */
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+
+        if (l1 == null) {
+            return l2;
+        }
+        if (l2 == null) {
+            return l1;
+        }
+
+        ListNode node = null;
+
+        if (l1.val > l2.val) {
+            node = l2;
+            node.next = mergeTwoLists(l1, l2.next);
+        } else {
+            node = l1;
+            node.next = mergeTwoLists(l2, l1.next);
+        }
+
+        return  node;
+    }
+
+
+
+    /**
+     * 翻转k组链表
+     */
+    public ListNode reverseKGroup(ListNode head, int k) {
+
+        if (head == null || k == 0) {
+            return head;
+        }
+
+        ListNode a = head, b = head;
+        while (k-- > 0) {
+            if (b == null) {
+                return head;
+            }
+
+            b = b.next;
+        }
+
+        ListNode newHead = reverseKGroupHelper(a, b);
+        a.next = reverseKGroup(b, k);
+
+        return newHead;
+    }
+
+    private ListNode reverseKGroupHelper(ListNode a, ListNode b) {
+
+        ListNode cur = a;
+        ListNode pre = null, tmp;
+
+        while (cur != b) {
+            tmp = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = tmp;
+        }
+
+        return pre;
+    }
+
+    /**
+     * 2个递增链表公共节点
+     */
 
 
 }
