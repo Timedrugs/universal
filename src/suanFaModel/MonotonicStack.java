@@ -8,11 +8,12 @@ import java.util.Stack;
 
 /**
  * 单调栈
+ * 「单调栈」主要解决 Next Great Number 一类算法问题
  *https://mp.weixin.qq.com/s?__biz=MzAxODQxMDM0Mw==&mid=2247487704&idx=1&sn=eb9ac24c644aa0950638c9b20384e982&chksm=9bd7eed0aca067c6b4424c40b7f234c815f83edfbb5efc9f51581335f110e9577114a528f3ec&scene=178&cur_album_id=1318892385270808576#rd
  * @author xiaokuo
  * @since 2021/2/4 5:05 下午
  */
-public class TediumStack {
+public class MonotonicStack {
 
     /**
      * 模板
@@ -47,7 +48,7 @@ public class TediumStack {
     }
 
     public static void main(String[] args) {
-        TediumStack cl = new TediumStack();
+        MonotonicStack cl = new MonotonicStack();
         System.out.println(Arrays.toString(cl.dailyTemperatures(new int[]{73,74,75,71,69,76})));
         System.out.println(Arrays.toString(cl.nextGreaterElements(new int[]{1,2,1})));
     }
