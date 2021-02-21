@@ -29,3 +29,6 @@ https://github.com/1297436022/algorithm_geek
 
 4.动态规划【14天】
 
+
+
+【翻转k组连表，第k大数】

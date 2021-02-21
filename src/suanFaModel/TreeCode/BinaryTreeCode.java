@@ -220,6 +220,7 @@ public class BinaryTreeCode {
     /**
      * 105.从前序与中序遍历序列构造二叉树
      * （难度 Medium）
+     * https://mp.weixin.qq.com/s?__biz=MzAxODQxMDM0Mw==&mid=2247487270&idx=1&sn=2f7ad74aabc88b53d94012ceccbe51be&chksm=9bd7f12eaca078384733168971147866c140496cb257946f8170f05e46d16099f3eef98d39d9&scene=178&cur_album_id=1318892385270808576#rd
      */
     public TreeNode buildTree(int[] preorder, int[] inorder) {
 
@@ -381,9 +382,18 @@ public class BinaryTreeCode {
 
 
 
-
-
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
