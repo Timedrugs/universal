@@ -90,8 +90,11 @@ HTTPS（Secure Hypertext Transfer Protocol）安全超文本传输协议
 http与https的区别在于
 
 1） http一般使用的是80端口，而https使用的是443端口
+
 2）http协议需要ca证书
+
 3）http是明文传输的，而https是通过ssl加密之后传输的。
+
 4）https使用的是非对称加密，所谓的非对称加密就是加密密钥与解密密钥是不相同的。
 
 非对称加密需要两个密钥：公开密钥（publickey）和私有密钥（privatekey）。
