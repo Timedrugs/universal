@@ -132,7 +132,6 @@ public class ListNodeCode {
 
         return newHead;
     }
-
     private ListNode reverseKGroupHelper(ListNode a, ListNode b) {
 
         ListNode cur = a;
@@ -153,4 +152,26 @@ public class ListNodeCode {
      */
 
 
+    /**
+     * 判断链表是否有环
+     * 题目：一个链表，判断其是否又环。
+     * 如果一个链表有环，那么用一个指针遍历将永远也走不到尽头。使用两个指针遍历：first每次走一步，second每次走两步。若链表有环则它们一定会相遇。
+     *
+     * @param head
+     */
+
+    /**
+     * 在O(1)时间删除链表结点
+     * 题目：给定单向链表的头指针和一个结点指针，定义一个函数在 O(1)时间删除该结点。（剑指offer，第13题）
+     *
+     * @return
+     */
+
+
+    /**
+     * 题目：输入一个链表，输出该链表中倒数第k个结点。
+     * 例如： 1 2 3 4 5 6
+     *
+     * @param head
+     */
 }
