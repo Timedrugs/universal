@@ -32,6 +32,7 @@ public class BinarySearchTreeCode {
         TreeNode root = new TreeNode(1);
         root.left = new TreeNode(1);
         System.out.println(cl.isValidBST(root));
+       int[] a = new int[]{};
     }
 
 
@@ -111,6 +112,34 @@ public class BinarySearchTreeCode {
         }
 
         return root;
+    }
+
+    /**
+     *  二叉树数据结构TreeNode可用来表示单向链表（其中left置空，right为下一个链表节点）。实现一个方法，把二叉搜索树转换为单向链表，要求依然符合二叉
+     * //搜索树的性质，转换操作应是原址的，也就是在原始的二叉搜索树上直接修改。
+     */
+    private TreeNode head, tail;
+    public TreeNode convertBiNode(TreeNode root) {
+        if (root == null){
+            return null;
+        }
+
+        head = new TreeNode(-1);
+        tail = head;
+        inOrder(root);
+        return head.right;
+    }
+    private  void inOrder(TreeNode root){
+        if (root == null){
+            return;
+        }
+        //中序遍历
+        inOrder(root.left);
+        //左子树放到右子树上
+        tail.right = root;
+        tail = root;
+        tail.left = null;
+        inOrder(root.right);
     }
 
 }
