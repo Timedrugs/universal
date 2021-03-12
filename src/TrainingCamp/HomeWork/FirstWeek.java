@@ -2,87 +2,48 @@ package TrainingCamp.HomeWork;
 
 /**
  * @author xiaokuo
- * @since 2021/3/10 9:49 下午
+ * @since 2021/3/11 9:30 下午
  */
 public class FirstWeek {
 
+    public static void main(String[] args) {
+        FirstWeek cl = new FirstWeek();
 
-    /**
-     * 11 盛更多水
-     *
-     */
-    public int maxArea(int[] height) {
-
-        int len = height.length;
-        if (len == 0) {
-            return 0;
-        }
-        int max = 0;
-        int left = 0;
-        int right = len - 1;
-        while (left < right){
-            int high =  Math.min(height[left], height[right]);
-            max = Math.max(max, (right-left)*high);
-
-            if (height[left] > height[right]){
-                right--;
-            }else{
-                left++;
-            }
-        }
-        return  max;
+        cl.rotate(new int[]{1, 2}, 3);
     }
 
     /**
-     * 283 移动0
-     *
+     * 189 旋转数组
+     * https://leetcode-cn.com/problems/rotate-array/
      */
-    public void moveZeroes(int[] nums) {
-
+    public void rotate(int[] nums, int k) {
         int len = nums.length;
-        if (len == 0){
+
+        if (len < 2){
+            return;
+        }
+        //k 大于 len 超出长度
+        k %= len;
+        //整体倒叙
+        reverse(nums, 0, len - 1);
+        //前k个倒叙
+        reverse(nums, 0, k - 1);
+        //后len - k倒叙
+        reverse(nums, k, len - 1);
+    }
+
+    private void reverse(int[] nums, int start, int end) {
+        if (nums.length == 0){
             return;
         }
 
-        int j = 0;
-        for (int i = 0; i < len; i++){
+        while (start < end){
 
-            if (nums[i] == 0){
-                continue;
-            }
-            nums[j] = nums[i];
-            if (i != j){
-                nums[i] = 0;
-            }
-            j++;
+            int tmp = nums[start];
+            nums[start++] = nums[end];
+            nums[end--] = tmp;
         }
-        return;
+
     }
-
-    /**
-     * 70 爬楼梯
-     *
-     */
-    public int climbStairs(int n) {
-
-        if (n <= 2){
-            return n;
-        }
-
-        int[] dp = new int[n+1];
-        dp[0] = 0;
-        dp[1] = 1;
-        dp[2] = 2;
-
-        for (int i = 3; i <= n; i++){
-            dp[i] = dp[i - 1] + dp[i - 2];
-        }
-
-        return dp[n];
-    }
-
-    /**
-     * 15 三数之和
-     */
 
 }
