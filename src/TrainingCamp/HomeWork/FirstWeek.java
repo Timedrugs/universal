@@ -1,10 +1,7 @@
 package TrainingCamp.HomeWork;
 
 import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * TODO Description
@@ -18,17 +15,19 @@ public class FirstWeek {
         FirstWeek cl = new FirstWeek();
 
         cl.rotate(new int[]{1, 2}, 3);
-        int[] arr = new int[]{1,1,1,2,2,3,4};
-        System.out.println(cl.removeDuplicates(arr));
+//        int[] arr = new int[]{1,1,1,2,2,3,4};
+//        System.out.println(cl.removeDuplicates(arr));
+//
+//        int[] arr1 = new int[]{0};
+//        cl.merge(arr1, 0, new int[]{1}, 1);
+//        System.out.println(arr1.toString());
+//
+//        int[] arr2 = new int[]{0,1,0,3,12};
+//        cl.moveZeroes(arr2);
+//        System.out.println(Arrays.toString(arr2));
+//        System.out.println(cl.isAnagram("anagram","nagaram"));
 
-        int[] arr1 = new int[]{0};
-        cl.merge(arr1, 0, new int[]{1}, 1);
-        System.out.println(arr1.toString());
-
-        int[] arr2 = new int[]{0,1,0,3,12};
-        cl.moveZeroes(arr2);
-        System.out.println(Arrays.toString(arr2));
-        System.out.println(cl.isAnagram("anagram","nagaram"));
+        System.out.println(cl.nthUglyNumber(5));
     }
 
     /**
@@ -267,6 +266,98 @@ public class FirstWeek {
         return sMap.equals(tMap);
     }
 
+    /**
+     * 94. 二叉树的中序遍历
+     */
+    public List<Integer> inorderTraversal(TreeNode root) {
+        if (root == null){
+            return new ArrayList<>();
+        }
+
+        List<Integer> res = new ArrayList<>();
+        help94(res, root);
+        return res;
+    }
+    public void help94(List<Integer> list, TreeNode root){
+        if (root == null){
+            return;
+        }
+        if(root.left != null){
+            help94(list, root.left);
+        }
+
+        list.add(root.val);
+        if(root.right != null){
+            help94(list, root.right);
+        }
+    }
+
+    /**
+     * 144. 二叉树的前序遍历
+     * @param root
+     * @return
+     */
+    public List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+
+        if(root == null){
+            return res;
+        }
+
+        help144(res, root);
+        return res;
+    }
+    private void help144(List<Integer> list, TreeNode root){
+        if(root == null){
+            return;
+        }
+        list.add(root.val);
+
+        if(root.left != null){
+            help144(list, root.left);
+        }
+
+        if(root.right != null){
+            help144(list, root.right);
+        }
+    }
+
+    /**
+     * 剑指 Offer 49. 丑数
+     */
+    public int nthUglyNumber(int n) {
+
+        if (n == 0) {
+            return 0;
+        }
+        int[] dp = new int[n];
+        dp[0] = 1;
+        int a = 0, b = 0, c = 0;
+
+        //dp[a] * 2, dp[b]*3, dp[c]* 5 最小值,然后相应的a,b,c加一
+        for (int i = 1; i < n; i++) {
+            int minVlue = threeMin(dp[a] * 2, dp[b] * 3, dp[c] * 5);
+
+            if (minVlue == dp[a] * 2) {
+                a++;
+            }
+
+            if (minVlue == dp[b] * 3) {
+                b++;
+            }
+            if (minVlue == dp[c] * 5) {
+                c++;
+            }
+            dp[i] = minVlue;
+        }
+
+        return dp[n - 1];
+    }
+
+    private int threeMin(int a, int b, int c) {
+        int tmp = Math.min(a, b);
+        return Math.min(tmp, c);
+    }
 
 }
 
