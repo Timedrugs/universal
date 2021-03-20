@@ -14,13 +14,18 @@ public class SlidingWindow {
     public static void main(String[] args) {
 
 //        System.out.println((new SlidingWindow()).minWindow("ADOBECODEBANC", "ABC"));
-//        System.out.println((new SlidingWindow()).lengthOfLongestSubstring("abcabcbb"));
+//        System.out.println((new SlidingWindow()).minWindowV1("ADOBECODECBANC", "ABC"));
+//        System.out.println((new SlidingWindow()).lengthOfLongestSubstring("abcbadca"));
 //        System.out.println((new SlidingWindow()).findAnagrams("baa", "aa"));
 //        System.out.println((new SlidingWindow()).checkInclusion("hello", "ooolleoooleh"));
-//        System.out.println(Arrays.toString((new SlidingWindow()).maxSlidingWindow(new int[]{1,3,-1,-3,5,3,6,7}, 3)));
+        System.out.println(Arrays.toString((new SlidingWindow()).maxSlidingWindow(new int[]{1,3,-1,-3,5,3,6,7}, 3)));
 //        System.out.println(Arrays.toString((new SlidingWindow()).maxSlidingWindow(new int[]{1}, 1)));
-        System.out.println(Arrays.toString((new SlidingWindow()).maxSlidingWindow(new int[]{1, 3, 1, 2, 0, 5}, 3)));
+//        System.out.println(Arrays.toString((new SlidingWindow()).maxSlidingWindow(new int[]{1, 3, 1, 2, 0, 5}, 3)));
+
+//        System.out.println((new SlidingWindow()).t438("abcbadca", "abc"));
     }
+
+
 
 
     /**
@@ -468,4 +473,55 @@ public class SlidingWindow {
         list.add(n);
         return list;
     }
+
+    private List<Integer> t438(String s, String p) {
+        int sLen = s.length();
+        int pLen = p.length();
+
+        List<Integer> res = new ArrayList<>();
+        if (pLen == 0 || sLen == 0){
+            return res;
+        }
+        Map<Character, Integer>  needs = new HashMap<>();
+        Map<Character, Integer>  windows = new HashMap<>();
+
+        for (int i =0; i < pLen; i++){
+            char cur = p.charAt(i);
+            needs.put(cur, needs.getOrDefault(cur, 0) + 1);
+        }
+
+        int left = 0;
+        int right = 0;
+        int valid = 0;
+        while (right < sLen){
+            char rChar = s.charAt(right);
+
+            if (needs.containsKey(rChar)){
+                windows.put(rChar, windows.getOrDefault(rChar, 0) + 1);
+
+                if (windows.get(rChar).equals(needs.get(rChar))){
+                    valid++;
+                }
+            }
+
+            while (valid == needs.size()){
+                char lChar = s.charAt(left);
+                if (right - left + 1 == pLen){
+                    res.add(left);
+                }
+
+                if (needs.containsKey(lChar)){
+                    if (windows.get(lChar).equals(needs.get(lChar))){
+                        valid--;
+                    }
+                    windows.put(lChar, windows.getOrDefault(lChar, 1) - 1);
+                }
+
+                left++;
+            }
+            right++;
+        }
+        return res;
+    }
+
 }
