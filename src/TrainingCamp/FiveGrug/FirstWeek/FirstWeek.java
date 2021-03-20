@@ -1,4 +1,4 @@
-package TrainingCamp.FiveGrug;
+package TrainingCamp.FiveGrug.FirstWeek;
 
 /**
  * @author xiaokuo
