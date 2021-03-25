@@ -6,15 +6,20 @@ package TrainingCamp.分治;
  */
 public class 模板 {
 
-    private static int divideConquer(Problem problem){
+    private static void divideConquer(Problem problem) {
 
-        if (problem == null){
+//        if (problem == null) {
+//
+//            int res = process_last_result();
+//        }
 
-        }
-        return  0;
+//        subProblems = split_problem(problem);
+//        res0 = divideConquer(subProblems[0]);
+//        res1 = divideConquer(subProblems[1]);
+//        return process_result(res0, res1);
     }
 }
 
-class Problem{
+class Problem {
 
 }
