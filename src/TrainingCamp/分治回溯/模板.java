@@ -1,4 +1,4 @@
-package TrainingCamp.分治;
+package TrainingCamp.分治回溯;
 
 /**
  * @author xiaokuo

@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2021. 贝壳找房（北京）科技有限公司
  */
-package TrainingCamp.分治;
+package TrainingCamp.分治回溯;
 
 import java.util.ArrayList;
 import java.util.List;
