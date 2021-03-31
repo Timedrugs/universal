@@ -3,7 +3,9 @@
  */
 package TrainingCamp.分治回溯;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 /**
@@ -15,30 +17,36 @@ import java.util.List;
  * 77
  */
 public class 组合77 {
+
+    public static void main(String[] args) {
+        组合77 cl = new 组合77();
+        System.out.println(cl.combine(4, 2));
+    }
     public List<List<Integer>> combine(int n, int k) {
 
         List<Integer> path = new ArrayList();
         List<List<Integer>> res = new ArrayList<>();
-        divide(n, k, res, path);
+        dfs(1, n, k, res, path);
         return res;
     }
 
-    private void divide(int n, int k, List<List<Integer>> res, List<Integer> path){
+    private void dfs(int start, int n, int k, List<List<Integer>> res, List<Integer> path){
+
         if (path.size() == k){
             res.add(new ArrayList<>(path));
             return;
         }
 
-        for (int i = 1; i <= n; i++){
-            
+        for (int i = start; i <= n; i++){
+
             //过滤
             if (path.contains(i)){
                 continue;
             }
             //选择
             path.add(i);
-            //下一层
-            divide(n, k, res, path);
+            //下一层  下一轮搜索，设置的搜索起点要加 1，因为组合数理不允许出现重复的元素
+            dfs(i + 1, n, k, res, path);
             //清楚
             path.remove(path.size() - 1);
         }
