@@ -12,7 +12,7 @@ package TrainingCamp.BFS;
  */
 public class 二叉树最小深度 {
 
-    int minDepth(TreeNode root) {
-
-    }
+//    int minDepth(TreeNode root) {
+//
+//    }
 }
