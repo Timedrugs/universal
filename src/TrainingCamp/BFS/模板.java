@@ -34,7 +34,7 @@ public class 模板 {
             int size = q.size();
             //将当前队列中的所有节点像四周扩散
             for(int i = 0; i < size; i++){
-                Node cur = q.poll();
+                Node cur = q.poll(); //第一个元素，并删除
 
                 //重点：这里判断是否到达了终点
                 if(cur == target){
