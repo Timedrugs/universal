@@ -113,6 +113,13 @@
     epoll还是poll的一种优化，返回后不需要对所有的fd进行遍历，在内核中维持了fd的列表。select和poll是将这个内核列表维持在用户态，然后传递到内核中。但是只有在2.6的内核才支持。
     epoll更适合于处理大量的fd ，且活跃fd不是很多的情况，毕竟fd较多还是一个串行的操作
 
+76. php中hash table 数组是怎么扩容的
+
+77. PHP gc
+
+78. redis hashtable 如何扩容
+
+79. redis hash 底层实现
 
 
 提升处，
