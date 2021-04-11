@@ -20,7 +20,6 @@ public class S字形打印二叉树 {
             return res;
         }
         //dfs
-        List<Integer> path = new ArrayList<>();
         dfs(res, root, 0);
         return res;
 
