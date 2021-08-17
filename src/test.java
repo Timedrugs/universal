@@ -24,7 +24,35 @@ import java.util.stream.Collectors;
 public class test {
 
   public static void main(String[] args) {
+    List<Integer> integerList = new ArrayList<>();
+    integerList.add(3);//autoboxing
+    integerList.add(1223);//autoboxing
+    int iq = integerList.get(0);//unboxing
+    int iq1 = integerList.get(1);//unboxing
+    Integer iq2 = integerList.get(1);//unboxing
+    System.out.println(iq);
+    System.out.println(integerList.get(1));
+    System.out.println(integerList.get(1) == 1223);
+    System.out.println(iq1 == 1223);
+    System.out.println(iq2 == 1223);
+    Integer q = 1223;
+    System.out.println(iq2 == q);
+    System.exit(0);
 
+
+
+    Integer f1 = 100;
+    Integer f2 = 100;
+    Integer f3 = 150;
+    Integer f4 = 150;
+    Integer f5 = 128;
+    Integer f6 = 128;
+
+    System.out.println(f1 == f2);//true
+    System.out.println(f3 == f4);//false
+    System.out.println(f3.equals(f4) );//
+    System.out.println(f5 == (f6) );//
+    System.exit(0);
     Set<Long> set = new HashSet<>();
     set.add(1L);
     set.add(2L);
