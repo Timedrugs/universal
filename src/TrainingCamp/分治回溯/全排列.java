@@ -4,7 +4,9 @@
 package TrainingCamp.分治回溯;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * TODO Description
@@ -16,7 +18,8 @@ public class 全排列 {
 
     public static void main(String[] args) {
         全排列 cl = new 全排列();
-        cl.permute(new int[]{1,2,3});
+        List<List<Integer>> a = cl.permute(new int[]{1,2,3});
+        System.out.println(a);
     }
     /**
      * 46 给定一个 没有重复 数字的序列，返回其所有可能的全排列。
@@ -30,12 +33,14 @@ public class 全排列 {
             return res;
         }
         //记录路径
-        List<Integer> path = new ArrayList();
+//        List<Integer> path = new ArrayList();
+        Set<Integer> path = new HashSet<>();
         dfs(nums, res, path);
         return res;
     }
 
-    private void dfs(int[] nums, List<List<Integer>> res, List<Integer> path){
+//    private void dfs(int[] nums, List<List<Integer>> res, List<Integer> path){
+    private void dfs(int[] nums, List<List<Integer>> res, Set<Integer> path){
         //结束条件
         if(nums.length == path.size()){
             res.add(new ArrayList<>(path));
@@ -56,7 +61,8 @@ public class 全排列 {
             dfs(nums, res, path);
 
             //取消选择
-            path.remove(path.size() - 1);
+//            path.remove(path.size() - 1);
+            path.remove(nums[i]);
         }
     }
 

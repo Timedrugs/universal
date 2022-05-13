@@ -1,4 +1,4 @@
-1.binlog 方式： statement row maxEd
+1.binlog 方式： statement row maxId
 
 2.主库 A 从本地读取 binlog，发给从库 B；这里的本地是指文件系统的 page cache还是disk呢？
 

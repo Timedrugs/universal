@@ -13,12 +13,15 @@ public class SlidingWindow {
 
     public static void main(String[] args) {
 
+
 //        System.out.println((new SlidingWindow()).minWindow("ADOBECODEBANC", "ABC"));
+        System.out.println((new SlidingWindow()).minWindow1("ADOBECODECBANC", "ABC"));
 //        System.out.println((new SlidingWindow()).minWindowV1("ADOBECODECBANC", "ABC"));
 //        System.out.println((new SlidingWindow()).lengthOfLongestSubstring("abcbadca"));
 //        System.out.println((new SlidingWindow()).findAnagrams("baa", "aa"));
 //        System.out.println((new SlidingWindow()).checkInclusion("hello", "ooolleoooleh"));
-        System.out.println(Arrays.toString((new SlidingWindow()).maxSlidingWindow(new int[]{1,3,-1,-3,5,3,6,7}, 3)));
+//        System.out.println(Arrays.toString((new SlidingWindow()).maxSlidingWindow(new int[]{1,3,-1,-3,5,3,6,7}, 3)));
+//        System.out.println(Arrays.toString((new SlidingWindow()).maxSlidingWindow1(new int[]{1,3,-1,-3,5,3,6,7}, 3)));
 //        System.out.println(Arrays.toString((new SlidingWindow()).maxSlidingWindow(new int[]{1}, 1)));
 //        System.out.println(Arrays.toString((new SlidingWindow()).maxSlidingWindow(new int[]{1, 3, 1, 2, 0, 5}, 3)));
 
@@ -524,4 +527,108 @@ public class SlidingWindow {
         return res;
     }
 
+
+
+
+    public int[] maxSlidingWindow1(int[] nums, int k) {
+        int len = nums.length;
+
+        if(len == 0){
+            return nums;
+        }
+
+        if(len < k){
+            return new int[]{Arrays.stream(nums).max().getAsInt()};
+        }
+
+        int valid = 0, right = 0, index = 0;
+        int[] res = new int[len - k + 1];
+        List<Integer> windows = new ArrayList<>();
+        while(right < len){
+
+            if (windows.size() == k){
+                windows.remove(0);
+            }
+
+            if(valid < k){
+                listPush1(windows, nums[right]);
+            }
+            valid++;
+            if(valid == k){
+                res[index++] = windows.get(0);
+                valid--;
+
+                if (nums[right - k + 1] == windows.get(0)){
+                    windows.remove(0);
+                }
+            }
+            right++;
+        }
+
+        return res;
+    }
+
+    public void listPush1(List<Integer> list, int i){
+
+        while (list.size() > 0 && list.get(list.size()-1) < i){
+            list.remove(list.size()-1);
+        }
+
+        list.add(i);
+    }
+
+
+    public String minWindow1(String s, String t) {
+
+        int sLen = s.length();
+        int tLen = t.length();
+        if(tLen > sLen){
+            return "";
+        }
+        if (sLen == 0 || tLen == 0) {
+            return "";
+        }
+
+        Map<Character, Integer> windows = new HashMap<>();
+        Map<Character, Integer> needs   = new HashMap<>();
+
+        for(int i = 0; i < tLen; i++){
+            char cur = t.charAt(i);
+            needs.put(cur, needs.getOrDefault(cur, 0) + 1);
+        }
+
+        int left = 0, right = 0, valid = 0, len = s.length() + 1, start = 0;
+
+        while (right < sLen){
+            char rCur = s.charAt(right);
+            right++;
+            if(needs.containsKey(rCur)){
+                windows.put(rCur, windows.getOrDefault(rCur, 0) + 1);
+                if (windows.get(rCur).equals(needs.get(rCur))){
+                    valid++;
+                }
+            }
+
+            System.out.println(Arrays.asList(left, right));
+            while (valid == needs.size()){
+                char lCur = s.charAt(left);
+
+                if(right - left < len){
+                    len = right - left;
+                    start = left;
+                }
+                left++;
+                //缩小窗口
+                if(needs.containsKey(lCur)){
+                    int windowsValue = windows.get(lCur);
+                    if(windowsValue == (needs.get(lCur))){
+                        valid--;
+                    }
+                    windows.put(lCur, --windowsValue);
+                }
+            }
+        }
+        System.out.println( len);
+        return len == s.length() + 1 ? "" : s.substring(start, len + start);
+    }
 }

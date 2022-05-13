@@ -5,6 +5,7 @@ package suanFaModel.ListNodeCode;
 
 
 import java.util.List;
+import java.util.PriorityQueue;
 
 /**
  * 链表
@@ -16,23 +17,26 @@ public class ListNodeCode {
 
     public static void main(String[] args) {
         ListNode l1 = new ListNode(9);
-        ListNode l10 = new ListNode(9);
-        ListNode l11 = new ListNode(9);
-        ListNode l12 = new ListNode(9);
-        ListNode l13 = new ListNode(9);
-        l1.next = l10;
-        l10.next = l11;
-        l11.next = l12;
-        l12.next = l13;
+//        ListNode l10 = new ListNode(10);
+//        ListNode l11 = new ListNode(11);
+//        ListNode l12 = new ListNode(14);
+//        ListNode l13 = new ListNode(16);
+//        l1.next = l10;
+//        l10.next = l11;
+//        l11.next = l12;
+//        l12.next = l13;
 
-        ListNode l2 = new ListNode(9);
+        ListNode l2 = new ListNode(1);
         ListNode l20 = new ListNode(9);
-        ListNode l21 = new ListNode(9);
+        ListNode l21 = new ListNode(16);
         l2.next = l20;
         l20.next = l21;
 
         ListNodeCode cl = new ListNodeCode();
-        printListNode(cl.addTwoNumbers(l1, l2)); //100998
+//        printListNode(cl.addTwoNumbers(l1, l2)); //100998
+//      ListNode[] listNodes = new ListNode[]{l1, l2};
+//      printListNode( cl.mergeKLists(listNodes));
+      printListNode( cl.removeNthFromEnd(l1, 1));
     }
 
     /**
@@ -232,6 +236,59 @@ public class ListNodeCode {
             head.val = head.next.val;
             head = head.next;
         }
+    }
+
+
+    /**
+     * 23 合并k个递增链表
+     * @param lists
+     * @return
+     */
+    public ListNode mergeKLists(ListNode[] lists) {
+        if(lists == null || lists.length < 1){
+            return null;
+        }
+
+        //创建最小堆
+        PriorityQueue<ListNode> minQueue = new PriorityQueue<>(lists.length, (a,b) -> (a.val - b.val));
+
+        for(ListNode node: lists){
+            if(node != null){
+                minQueue.add(node);
+            }
+        }
+
+        ListNode head = new ListNode(0);
+        ListNode t = head;
+        while(!minQueue.isEmpty()){
+           ListNode tmp = minQueue.poll();
+           t.next = tmp;
+           if(tmp.next != null){
+             minQueue.add(tmp.next);
+           }
+           t = t.next;
+        }
+
+        return head.next;
+    }
+
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+
+        if(head == null){
+            return null;
+        }
+
+        //先找到倒数第n+1 个节点x , 然后 x.next = x.next.next;
+        if(n == 0){
+            return head.next;
+        }
+
+        ListNode p = getKthFromEnd(head, n);
+
+        p.next = p.next.next;
+
+        return head;
+
     }
 
 }

@@ -39,9 +39,28 @@ public class BinarySearchTreeCode {
     /**
      *  230 题「二叉搜索树中第K小的元素
      */
-//    public int kthSmallest(TreeNode root, int k) {
-//
-//    }
+    public int kthSmallest(TreeNode root, int k) {
+        if(root == null || k == 0){
+            return 0;
+        }
+        int ans = 0;
+        dfs(root, k, ans);
+        return  ans;
+    }
+
+    private void dfs(TreeNode root, int k, int ans) {
+
+        if(root == null){
+            return;
+        }
+
+        dfs(root.left, k--, ans);
+        if(k == 0){
+            ans = root.val;
+            return;
+        }
+        dfs(root.right, k--, ans);
+    }
 
     /**
      * 98 验证二叉搜索树

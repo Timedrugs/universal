@@ -33,4 +33,15 @@ public class 打家劫舍3 {
         node.put(root, res);
         return res;
     }
+
+    public int rob(int[] nums) {
+        int len = nums.length;
+        int[]  dp = new int[len + 1];
+
+        for(int i = len - 1; i >= 0; i--){
+            dp[i] = Math.max(dp[i] + dp[i - 2], dp[i - 1]);
+        }
+
+        return dp[len];
+    }
 }

@@ -4,6 +4,7 @@
 package suanFaModel.ArrayCode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -77,5 +78,14 @@ public class 合并2个无序数组 {
 
     return new  int[1];
   }
+
+//  private static  int[] mergeArr1(int[] arr1, int[] arr2){
+//
+//    Arrays.sort(arr1);
+//    Arrays.sort(arr2);
+//
+//
+//
+//  }
 
 }

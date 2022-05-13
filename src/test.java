@@ -6,13 +6,19 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
+import java.util.Stack;
 import java.util.stream.Collectors;
 
 /**
@@ -24,6 +30,77 @@ import java.util.stream.Collectors;
 public class test {
 
   public static void main(String[] args) {
+
+
+
+    int  xx = 2147483647;
+    long xxx = Long.MAX_VALUE;
+    System.out.println(xx > xxx);
+
+
+    List<Integer>  qa = new ArrayList<>();
+    qa.add(1);
+    qa.add(2);
+    qa.add(3);
+    qa.forEach(i -> {
+//      qa.remove(i);
+      System.out.println(qa.toString());
+    });
+
+    Iterator<Integer> iterator = qa.iterator();
+    while(iterator.hasNext()){
+      int next = iterator.next();
+      System.out.println("a:" + next);
+
+      iterator.remove();
+//      iterator.remove(next);
+      System.out.println("b:" + next);
+    }
+
+
+    System.out.println(BigDecimal.valueOf(81703).divide(new BigDecimal(100)).toString());
+    Map<Integer, Integer> map111 = new HashMap<>();
+    System.out.println(map111.containsKey(1));
+
+    BigDecimal brandRate = BigDecimal.valueOf(0.030000);
+    if (brandRate.compareTo(BigDecimal.ZERO) == 0) {
+      System.out.println(0);
+      return;
+    }
+
+    Long cpsAmount = 0L;
+    Long remainAmount = 2723436L - Optional.ofNullable(cpsAmount).orElse(0L);
+
+    long a111122 = brandRate
+        .multiply(BigDecimal.valueOf(remainAmount))
+        .setScale(2, RoundingMode.DOWN)
+        .longValue();
+
+    System.out.println(a111122);
+
+
+
+
+    System.out.println(12 == 123);
+    System.out.println(1299 == 1299);
+
+    char[] a1111 = new char[]{'2', '3'};
+    System.out.println(a1111[0]);
+
+    String s11 = "sdsfds fdsf fsd";
+   String[] a22 =  s11.split(" ");
+    System.out.println(a22
+    );
+    String s123= "qwe";
+    System.out.println(s123.charAt(0));
+     String[] tet = s123.split("");
+    System.out.println(tet);
+
+    Calendar cal=Calendar.getInstance();
+//      cal.add(Calendar.DATE,1);//这里改为1
+      Date time=cal.getTime();
+      String  ccc =  new SimpleDateFormat("yyyy-MM-dd 23:59:59").format(time);System.out.println(ccc);
+
     List<Integer> integerList = new ArrayList<>();
     integerList.add(3);//autoboxing
     integerList.add(1223);//autoboxing
@@ -128,4 +205,42 @@ public class test {
 //    System.out.println(map);
   }
 
+
+
+  private Stack<Integer> stack = new Stack<>();
+  private Stack<Integer> minStack = new Stack<>();
+
+
+
+  public void push(int val) {
+    stack.push(val);
+
+    if (!minStack.isEmpty() && minStack.peek() > val){
+      minStack.push(val);
+    }
+  }
+
+  public void pop() {
+    int val = stack.pop();
+    if (!minStack.isEmpty() && minStack.peek() == val){
+      minStack.pop();
+    }
+  }
+
+  public int top() {
+    return stack.peek();
+  }
+
+  public int getMin() {
+    return minStack.peek();
+  }
+
+  public int testSynchronized(){
+
+    synchronized (this){
+      System.out.println(111);
+    }
+
+    return 1;
+  }
 }
