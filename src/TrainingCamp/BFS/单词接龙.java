@@ -16,12 +16,16 @@ public class 单词接龙 {
         单词接龙 cl = new 单词接龙();
         List<String> wordList = new ArrayList<>();
 //        new String[]{"hot","dot","dog","lot","log","cog"}
+//        "hit"
+//        "cog"
+//            ["hot","dot","dog","lot","log","cog"]
         wordList.add("hot");
         wordList.add("dot");
+        wordList.add("dog");
         wordList.add("lot");
         wordList.add("log");
         wordList.add("cog");
-        System.out.println(cl.ladderLength("hit",  "cog", wordList));
+        System.out.println(cl.testMain("hit",  "cog", wordList));
     }
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
         int bLen = beginWord.length();
@@ -43,7 +47,6 @@ public class 单词接龙 {
             int size = q.size();
             for(int i = 0; i < size; i++){
                 String cur = q.remove(0);
-
 
                 for(int j = 0; j < len; j++){
                     String word = wordList.get(j);
@@ -73,5 +76,60 @@ public class 单词接龙 {
             }
         }
         return diff == 1;
+    }
+
+
+    public  int testMain(String beginWord, String endWord, List<String> wordList){
+
+        if(endWord.equals(beginWord)){
+            return 1;
+        }
+        int len = wordList.size();
+        List<String> q = new ArrayList<>();
+        Set<String> visited = new HashSet<>();
+
+        q.add(beginWord);
+        visited.add(beginWord);
+        int step = 1;
+        while (!q.isEmpty()){
+
+            int size = q.size();
+            step++;
+            for(int i = 0; i < size; i++){
+                String cur = q.remove(0);
+
+                for (int j = 0; j < len; j++){
+                    String c = wordList.get(j);
+                    if (!canUse1(c, cur)){
+                        continue;
+                    }
+
+                    if(visited.contains(c)){
+                        continue;
+                    }
+                    if (c == endWord){
+                        return step;
+                    }
+                    visited.add(c);
+                    q.add(c);
+                }
+            }
+        }
+
+        return 0;
+    }
+
+    private boolean canUse1(String c, String beginWord) {
+
+        int len = beginWord.length();
+        int diff = 0;
+        for(int i = 0; i < len; i++){
+            if (c.charAt(i) == beginWord.charAt(i)){
+                continue;
+            }
+            diff++;
+        }
+
+        return diff == 1 ? true : false;
     }
 }

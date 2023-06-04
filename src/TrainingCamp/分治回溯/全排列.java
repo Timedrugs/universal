@@ -19,6 +19,7 @@ public class 全排列 {
     public static void main(String[] args) {
         全排列 cl = new 全排列();
         List<List<Integer>> a = cl.permute(new int[]{1,2,3});
+//        List<List<Integer>> a = cl.a1(new int[]{1,2,3});
         System.out.println(a);
     }
     /**
@@ -33,14 +34,14 @@ public class 全排列 {
             return res;
         }
         //记录路径
-//        List<Integer> path = new ArrayList();
-        Set<Integer> path = new HashSet<>();
+        List<Integer> path = new ArrayList();
+//        Set<Integer> path = new HashSet<>();
         dfs(nums, res, path);
         return res;
     }
 
-//    private void dfs(int[] nums, List<List<Integer>> res, List<Integer> path){
-    private void dfs(int[] nums, List<List<Integer>> res, Set<Integer> path){
+    private void dfs(int[] nums, List<List<Integer>> res, List<Integer> path){
+//    private void dfs(int[] nums, List<List<Integer>> res, Set<Integer> path){
         //结束条件
         if(nums.length == path.size()){
             res.add(new ArrayList<>(path));
@@ -61,8 +62,36 @@ public class 全排列 {
             dfs(nums, res, path);
 
             //取消选择
-//            path.remove(path.size() - 1);
-            path.remove(nums[i]);
+            path.remove(path.size() - 1);
+//            path.remove(nums[i]);
+        }
+
+    }
+
+
+
+    private  List<List<Integer>> a1(int[] nums){
+        List<List<Integer>> res = new ArrayList<>();
+        Set<Integer> path = new HashSet<>();
+        dfs1(nums, res, path);
+        return res;
+    }
+
+    private void dfs1(int[] nums, List<List<Integer>> res, Set<Integer> path) {
+
+        if (nums.length == path.size()){
+            res.add(new ArrayList<>(path));
+            return;
+        }
+
+        for(int num : nums){
+            if(path.contains(num)){
+                continue;
+            }
+
+            path.add(num);
+            dfs1(nums, res, path);
+            path.remove(num);
         }
     }
 

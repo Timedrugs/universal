@@ -47,4 +47,34 @@ public class 二叉树最小深度 {
         return  depth;
     }
 
+
+    int test(TreeNode root){
+        if(root == null){
+            return 0;
+        }
+
+        List<TreeNode> list = new ArrayList<>();
+        list.add(root);
+        int step = 0;
+
+        while(!list.isEmpty()){
+
+            int size = list.size();
+            for(int i = 0; i < size; i++){
+                TreeNode cur = list.remove(0);
+                if(cur.right == null && cur.left == null){
+                    return step;
+                }
+
+                if(cur.right != null){
+                    list.add(cur.right);
+                }
+                if(cur.left != null){
+                    list.add(cur.left);
+                }
+            }
+            step++;
+        }
+        return step;
+    }
 }

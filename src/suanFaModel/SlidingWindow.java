@@ -15,12 +15,12 @@ public class SlidingWindow {
 
 
 //        System.out.println((new SlidingWindow()).minWindow("ADOBECODEBANC", "ABC"));
-        System.out.println((new SlidingWindow()).minWindow1("ADOBECODECBANC", "ABC"));
+//        System.out.println((new SlidingWindow()).minWindow1("ADOBECODECBANC", "ABC"));
 //        System.out.println((new SlidingWindow()).minWindowV1("ADOBECODECBANC", "ABC"));
 //        System.out.println((new SlidingWindow()).lengthOfLongestSubstring("abcbadca"));
 //        System.out.println((new SlidingWindow()).findAnagrams("baa", "aa"));
 //        System.out.println((new SlidingWindow()).checkInclusion("hello", "ooolleoooleh"));
-//        System.out.println(Arrays.toString((new SlidingWindow()).maxSlidingWindow(new int[]{1,3,-1,-3,5,3,6,7}, 3)));
+        System.out.println(Arrays.toString((new SlidingWindow()).maxSlidingWindow(new int[]{1,3,-1,-3,5,3,6,7}, 3)));
 //        System.out.println(Arrays.toString((new SlidingWindow()).maxSlidingWindow1(new int[]{1,3,-1,-3,5,3,6,7}, 3)));
 //        System.out.println(Arrays.toString((new SlidingWindow()).maxSlidingWindow(new int[]{1}, 1)));
 //        System.out.println(Arrays.toString((new SlidingWindow()).maxSlidingWindow(new int[]{1, 3, 1, 2, 0, 5}, 3)));
